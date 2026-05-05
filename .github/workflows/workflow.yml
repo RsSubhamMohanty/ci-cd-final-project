@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up job
+        uses: actions/checkout@v3
+
+      - name: Initialize containers
+        run: echo "Initializing..."
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run flake8
+        run: flake8 .
+
+      - name: Run tests
+        run: nosetests -v
+
+      - name: Complete job
+        run: echo "Done"
